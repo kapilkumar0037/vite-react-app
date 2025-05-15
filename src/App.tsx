@@ -16,20 +16,10 @@ function App() {
   ]);
 
   function onCompletedClicked(id: number) {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, completed: !todo.completed };
-      }
-      return todo;
-    });
-    setTodos(newTodos);
-    const newCompletedItems = completedItems.map((todo) => {
-      if (todo.id === id) {
-        return { ...todo, completed: !todo.completed };
-      }
-      return todo;
-    });
-    setCompletedItems(newCompletedItems);
+    const todo = todos.find((todo) => todo.id === id);
+    if (!todo) return;
+    setCompletedItems([...completedItems, {...todo, completed: true }]);
+    setTodos(todos.filter((todo) => todo.id !== id));
   }
 
   function onDeleteClicked(id: number) {
@@ -46,8 +36,6 @@ function App() {
   }) {
     const newTodos = [...todos, todo];
     setTodos(newTodos);
-    const newCompletedItems = [...completedItems, todo];
-    setCompletedItems(newCompletedItems);
   }
 
   return (

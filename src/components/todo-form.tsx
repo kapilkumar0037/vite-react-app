@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function TodoForm({ onCreateTodo }: any) {
   const [todoText, setTodoText] = useState("");
   return (
-    <form>
+    <div>
       <input
         type="text"
         placeholder="Add a new todo"
@@ -11,12 +11,12 @@ export default function TodoForm({ onCreateTodo }: any) {
       />
       <button
         onClick={() => {
-          onCreateTodo({ id: 3, title: todoText, completed: false });
+          onCreateTodo({ id: 5, title: todoText, completed: false });
           setTodoText("");
         }}
       >
         Add Todo
       </button>
-    </form>
+    </div>
   );
 }
