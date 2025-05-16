@@ -4,9 +4,15 @@ export default function TodoListItem({
   onDeleteClicked,
 }: any) {
   return (
-    <li>
-      {todo.title}
+    <tr>
+      <td>{todo.id}</td>
+      <td>{todo.title}</td>
+      <td>{todo.completed}</td>
+      <td>
       {todo.completed ? <button onClick={()=>onDeleteClicked(todo.id)}>Delete</button> : <button onClick={()=>onCompletedClicked(todo.id)}>Complete</button>}
-    </li>
+
+      </td>
+
+    </tr>
   );
 }

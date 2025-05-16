@@ -25,7 +25,17 @@ export default function TodoList({
     <div>
       <h1>Todo List</h1>
       <h3>Completed</h3>
-      <ul>
+
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Task name</th>
+            <th scope="col">Completed</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
         {completedItems.map((todo: any, index: number) => {
           return (
             <TodoListItem
@@ -35,9 +45,19 @@ export default function TodoList({
             />
           );
         })}
-      </ul>
+        </tbody>
+      </table>
       <h3>Todos</h3>
-      <ul>
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Task name</th>
+            <th scope="col">Completed</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
         {todos.map((todo: any, index: number) => {
           return (
             <TodoListItem
@@ -47,7 +67,10 @@ export default function TodoList({
             />
           );
         })}
-      </ul>
+        </tbody>
+      </table>
+      <h3>Add new todo</h3>
+
       <TodoForm onCreateTodo={onCreateTodo}></TodoForm>
     </div>
   );

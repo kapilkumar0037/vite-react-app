@@ -4,12 +4,12 @@ export default function TodoForm({ onCreateTodo }: any) {
   const [todoText, setTodoText] = useState("");
   return (
     <div>
-      <input
+      <input className="form-control"
         type="text"
         placeholder="Add a new todo"
         onChange={(e) => setTodoText(e.target.value)}
       />
-      <button
+      <button className="btn btn-primary"
         onClick={() => {
           onCreateTodo({ id: 5, title: todoText, completed: false });
           setTodoText("");
