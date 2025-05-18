@@ -1,5 +1,7 @@
+import { useSelector } from "react-redux";
 import TodoForm from "./todo-form";
 import TodoListItem from "./todo-list-item";
+
 
 export interface TodoListItem {
   id: number;
@@ -15,12 +17,12 @@ export interface TodoList {
 }
 
 export default function TodoList({
-  completedItems,
-  todos,
   onCompletedClicked,
   onDeleteClicked,
   onCreateTodo,
 }: TodoList) {
+  const completedItems = useSelector((state: any)=> state.todos.completedItems);
+  const todos = useSelector((state: any)=> state.todos.todos);
   return (
     <div>
       <h1>Todo List</h1>
