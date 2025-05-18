@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TodoForm from "./todo-form";
 import TodoListItem from "./todo-list-item";
-
+import { createTodo, deleteToDo, markCompleted } from "../store/todo-slice";
 
 export interface TodoListItem {
   id: number;
@@ -16,13 +16,13 @@ export interface TodoList {
   onCreateTodo: (todo: TodoListItem) => void;
 }
 
-export default function TodoList({
-  onCompletedClicked,
-  onDeleteClicked,
-  onCreateTodo,
-}: TodoList) {
-  const completedItems = useSelector((state: any)=> state.todos.completedItems);
-  const todos = useSelector((state: any)=> state.todos.todos);
+export default function TodoList() {
+  const completedItems = useSelector(
+    (state: any) => state.todos.completedItems
+  );
+  const todos = useSelector((state: any) => state.todos.todos);
+
+  const dispatch = useDispatch();
   return (
     <div>
       <h1>Todo List</h1>
@@ -38,15 +38,15 @@ export default function TodoList({
           </tr>
         </thead>
         <tbody>
-        {completedItems.map((todo: any, index: number) => {
-          return (
-            <TodoListItem
-              todo={todo}
-              key={index}
-              onDeleteClicked={onDeleteClicked}
-            />
-          );
-        })}
+          {completedItems.map((todo: any, index: number) => {
+            return (
+              <TodoListItem
+                todo={todo}
+                key={index}
+                onDeleteClicked={()=> dispatch(deleteToDo(todo.id))}
+              />
+            );
+          })}
         </tbody>
       </table>
       <h3>Todos</h3>
@@ -60,20 +60,20 @@ export default function TodoList({
           </tr>
         </thead>
         <tbody>
-        {todos.map((todo: any, index: number) => {
-          return (
-            <TodoListItem
-              todo={todo}
-              key={index}
-              onCompletedClicked={onCompletedClicked}
-            />
-          );
-        })}
+          {todos.map((todo: any, index: number) => {
+            return (
+              <TodoListItem
+                todo={todo}
+                key={index}
+                onCompletedClicked={()=>dispatch(markCompleted(todo.id))}
+              />
+            );
+          })}
         </tbody>
       </table>
       <h3>Add new todo</h3>
 
-      <TodoForm onCreateTodo={onCreateTodo}></TodoForm>
+      <TodoForm onCreateTodo={(todo: TodoListItem)=> dispatch(createTodo(todo))}></TodoForm>
     </div>
   );
 }

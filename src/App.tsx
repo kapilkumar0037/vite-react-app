@@ -38,13 +38,7 @@ function App() {
 
   return (
     <>
-      <TodoList
-        completedItems={completedItems}
-        todos={todos}
-        onCompletedClicked={onCompletedClicked}
-        onDeleteClicked={onDeleteClicked}
-        onCreateTodo={onCreateTodo}
-      />
+      <TodoList/>
     </>
   );
 }
