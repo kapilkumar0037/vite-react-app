@@ -11,9 +11,6 @@ export interface TodoListItem {
 export interface TodoList {
   completedItems: TodoListItem[];
   todos: TodoListItem[];
-  onCompletedClicked: (id: number) => void;
-  onDeleteClicked: (id: number) => void;
-  onCreateTodo: (todo: TodoListItem) => void;
 }
 
 export default function TodoList() {
@@ -73,7 +70,7 @@ export default function TodoList() {
       </table>
       <h3>Add new todo</h3>
 
-      <TodoForm onCreateTodo={(todo: TodoListItem)=> dispatch(createTodo(todo))}></TodoForm>
+      <TodoForm></TodoForm>
     </div>
   );
 }
