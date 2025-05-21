@@ -14,12 +14,12 @@
     "todos": [
         {
             "id": 3,
-            "title": "Learn angular",
+            "title": "Learn angular server",
             "completed": false
         },
         {
             "id": 4,
-            "title": "Learn Javascript",
+            "title": "Learn Javascript server",
             "completed": false
         }
     ]

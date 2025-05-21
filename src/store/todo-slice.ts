@@ -1,20 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import type { TodoList } from "../models/todo.models";
 
+export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
+    const response = await fetch('http://localhost:3000/todos');
+    const data = await response.json();
+    return data;
+});
+
+export const fetchCompletedTodos = createAsyncThunk('todos/completedTodos', async () => {
+    const response = await fetch('http://localhost:3000/completedItems');
+    const data = await response.json();
+    return data;
+});
+
+const initialState: TodoList = {
+    completedItems: [],
+    todos: []
+}
 export const todoSlice = createSlice({
     name: "todos",
-    initialState: {
-        completedItems: [
-            { id: 1, title: "Learn React", completed: true },
-            { id: 2, title: "Learn TypeScript", completed: true },
-        ],
-        todos: [
-            { id: 3, title: "Learn angular", completed: false },
-            { id: 4, title: "Learn Javascript", completed: false },
-        ]
-    },
+    initialState,
     reducers: {
         createTodo: (state, action) => {
-           state.todos = [...state.todos, action.payload];
+            state.todos = [...state.todos, action.payload];
         },
         deleteToDo: (state, action) => {
             const newTodos = state.todos.filter((todo) => todo.id !== action.payload);
@@ -24,13 +32,32 @@ export const todoSlice = createSlice({
 
         },
         markCompleted: (state, action) => {
-            const todo = state.todos.find((todo)=> todo.id===action.payload);
+            const todo = state.todos.find((todo) => todo.id === action.payload);
             if (!todo) return;
             state.completedItems = [...state.completedItems, { ...todo, completed: true }];
             state.todos = state.todos.filter((todo) => todo.id !== action.payload);
         }
 
-    }
+    },
+
+    extraReducers: (builder) => {
+        builder
+            //   .addCase(fetchUser.pending, (state) => {
+            //     state.loading = true;
+            //     state.error = null;
+            //   })
+            .addCase(fetchTodos.fulfilled, (state, action) => {
+                state.todos = action.payload;
+            })
+        //   .addCase(fetchUser.rejected, (state, action) => {
+        //     state.loading = false;
+        //     state.error = action.error.message;
+        //   });
+
+        .addCase(fetchCompletedTodos.fulfilled, (state, action) => {
+            state.completedItems = action.payload;
+        })
+    },
 });
 
 export const { createTodo, deleteToDo, markCompleted } = todoSlice.actions;

@@ -1,25 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
 import TodoForm from "./todo-form";
 import TodoListItem from "./todo-list-item";
-import { createTodo, deleteToDo, markCompleted } from "../store/todo-slice";
+import { deleteToDo, fetchCompletedTodos, fetchTodos, markCompleted } from "../store/todo-slice";
+import { useEffect } from "react";
+import type { AppDispatch } from "../store/store";
 
-export interface TodoListItem {
-  id: number;
-  title: string;
-  completed: boolean;
-}
-export interface TodoList {
-  completedItems: TodoListItem[];
-  todos: TodoListItem[];
-}
+
 
 export default function TodoList() {
   const completedItems = useSelector(
     (state: any) => state.todos.completedItems
   );
   const todos = useSelector((state: any) => state.todos.todos);
+  const dispatch = useDispatch<AppDispatch>();
+  //const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTodos());
+    dispatch(fetchCompletedTodos());
+  }, [dispatch]);
+
   return (
     <div>
       <h1>Todo List</h1>
