@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { TodoList } from "../models/todo.models";
+import axios from "axios";
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
     const response = await fetch('http://localhost:3000/todos');
@@ -11,6 +12,15 @@ export const fetchCompletedTodos = createAsyncThunk('todos/completedTodos', asyn
     const response = await fetch('http://localhost:3000/completedItems');
     const data = await response.json();
     return data;
+});
+
+export const deleteTodos = createAsyncThunk('todos/deleteTodo', async (id: number) => {
+    try{
+        await axios.delete('http://localhost:3000/completedItems/'+id);
+        return id;
+    } catch {
+        console.error('Error deleting todo:', id);
+    }
 });
 
 const initialState: TodoList = {

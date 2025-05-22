@@ -1,11 +1,14 @@
 import { useDispatch } from "react-redux";
-import { deleteToDo, markCompleted } from "../store/todo-slice";
+import { deleteTodos, markCompleted } from "../store/todo-slice";
 
 export default function TodoListItem({
   todo
 }: any) {
   const dispatch = useDispatch();
 
+  const handleDelete = (id: number) => {
+    dispatch(deleteTodos(id));
+  };
   return (
     <tr>
       <td>{todo.id}</td>
@@ -15,7 +18,7 @@ export default function TodoListItem({
         {todo.completed ? (
           <button
             className="btn btn-danger"
-            onClick={() => dispatch(deleteToDo(todo.id))}>
+            onClick={() => handleDelete(todo.id)}>
             Delete
           </button>
         ) : (
