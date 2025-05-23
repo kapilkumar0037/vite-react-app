@@ -13,7 +13,6 @@ export default function TodoList() {
   );
   const todos = useSelector((state: any) => state.todos.todos);
   const dispatch = useDispatch<AppDispatch>();
-  //const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTodos());

@@ -14,14 +14,13 @@ export const fetchCompletedTodos = createAsyncThunk('todos/completedTodos', asyn
     return data;
 });
 
-export const deleteTodos = createAsyncThunk('todos/deleteTodo', async (id: number) => {
-    try{
-        await axios.delete('http://localhost:3000/completedItems/'+id);
+export const deleteTodosAsync = createAsyncThunk(
+    'todos/deleteTodo',
+    async (id: number) => {
+        await fetch(`http://localhost:3000/completedItems/${id}`, { method: 'DELETE' });
         return id;
-    } catch {
-        console.error('Error deleting todo:', id);
     }
-});
+);
 
 const initialState: TodoList = {
     completedItems: [],
@@ -59,14 +58,19 @@ export const todoSlice = createSlice({
             .addCase(fetchTodos.fulfilled, (state, action) => {
                 state.todos = action.payload;
             })
-        //   .addCase(fetchUser.rejected, (state, action) => {
-        //     state.loading = false;
-        //     state.error = action.error.message;
-        //   });
+            //   .addCase(fetchUser.rejected, (state, action) => {
+            //     state.loading = false;
+            //     state.error = action.error.message;
+            //   });
 
-        .addCase(fetchCompletedTodos.fulfilled, (state, action) => {
-            state.completedItems = action.payload;
-        })
+            .addCase(fetchCompletedTodos.fulfilled, (state, action) => {
+                state.completedItems = action.payload;
+            })
+
+            .addCase(deleteTodosAsync.fulfilled, (state, action) => {
+                const newCompletedItems = state.completedItems.filter((todo) => todo.id !== action.payload);
+                state.completedItems = newCompletedItems;
+            })
     },
 });
 

@@ -1,13 +1,14 @@
 import { useDispatch } from "react-redux";
-import { deleteTodos, markCompleted } from "../store/todo-slice";
+import { deleteTodosAsync, markCompleted } from "../store/todo-slice";
+import type { AppDispatch } from "../store/store";
 
 export default function TodoListItem({
   todo
 }: any) {
-  const dispatch = useDispatch();
+   const dispatch = useDispatch<AppDispatch>(); 
 
-  const handleDelete = (id: number) => {
-    dispatch(deleteTodos(id));
+  const handleDelete = (id:any) => {
+    dispatch(deleteTodosAsync(id));
   };
   return (
     <tr>
