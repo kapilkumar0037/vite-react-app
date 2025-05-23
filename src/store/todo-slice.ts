@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { TodoList } from "../models/todo.models";
-import axios from "axios";
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
     const response = await fetch('http://localhost:3000/todos');
@@ -32,13 +31,6 @@ export const todoSlice = createSlice({
     reducers: {
         createTodo: (state, action) => {
             state.todos = [...state.todos, action.payload];
-        },
-        deleteToDo: (state, action) => {
-            const newTodos = state.todos.filter((todo) => todo.id !== action.payload);
-            state.todos = newTodos;
-            const newCompletedItems = state.completedItems.filter((todo) => todo.id !== action.payload);
-            state.completedItems = newCompletedItems;
-
         },
         markCompleted: (state, action) => {
             const todo = state.todos.find((todo) => todo.id === action.payload);
@@ -74,4 +66,4 @@ export const todoSlice = createSlice({
     },
 });
 
-export const { createTodo, deleteToDo, markCompleted } = todoSlice.actions;
+export const { createTodo, markCompleted } = todoSlice.actions;

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import TodoForm from "./todo-form";
 import TodoListItem from "./todo-list-item";
-import { deleteToDo, fetchCompletedTodos, fetchTodos, markCompleted } from "../store/todo-slice";
+import { fetchCompletedTodos, fetchTodos, markCompleted } from "../store/todo-slice";
 import { useEffect } from "react";
 import type { AppDispatch } from "../store/store";
 
@@ -39,7 +39,6 @@ export default function TodoList() {
               <TodoListItem
                 todo={todo}
                 key={index}
-                onDeleteClicked={()=> dispatch(deleteToDo(todo.id))}
               />
             );
           })}
