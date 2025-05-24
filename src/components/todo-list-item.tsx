@@ -12,9 +12,7 @@ export default function TodoListItem({
   };
   return (
     <tr>
-      <td>{todo.id}</td>
       <td>{todo.title}</td>
-      <td>{todo.completed.toString()}</td>
       <td>
         {todo.completed ? (
           <button

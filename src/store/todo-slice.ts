@@ -17,7 +17,8 @@ export const deleteTodosAsync = createAsyncThunk(
 
 const initialState: TodoList = {
     completedItems: [],
-    todos: []
+    todos: [],
+    deletedTodos: []
 }
 export const todoSlice = createSlice({
     name: "todos",
@@ -42,7 +43,7 @@ export const todoSlice = createSlice({
             //     state.error = null;
             //   })
             .addCase(fetchTodos.fulfilled, (state, action) => {
-                const todos : TodoListItem[] = action.payload;
+                const todos: TodoListItem[] = action.payload;
                 state.completedItems = todos.filter((todo) => todo.completed === true);
                 state.todos = todos.filter((todo) => todo.completed === false);
 
@@ -53,7 +54,12 @@ export const todoSlice = createSlice({
             //   });
 
             .addCase(deleteTodosAsync.fulfilled, (state, action) => {
-                state.completedItems = state.completedItems.filter((todo) => todo.id !== action.payload);;
+                state.completedItems = state.completedItems.map((todo) => {
+                    todo.id === action.payload ? todo.isDeleted = true : todo.isDeleted = false;
+                    return todo;
+                });
+                state.deletedTodos = [...state.deletedTodos, ...state.completedItems.filter((todo) => todo.isDeleted=== true)];
+                state.completedItems = state.completedItems.filter((todo) => todo.id !== action.payload);
             })
     },
 });

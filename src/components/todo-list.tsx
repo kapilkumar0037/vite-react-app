@@ -9,6 +9,9 @@ export default function TodoList() {
   const completedItems = useSelector(
     (state: any) => state.todos.completedItems
   );
+  const deletedTodos = useSelector(
+    (state: any) => state.todos.deletedTodos
+  );
   const todos = useSelector((state: any) => state.todos.todos);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -24,7 +27,7 @@ export default function TodoList() {
   else {
     return (
       <div>
-        <div className="card text-center p-2">
+        <div className="card p-2">
           <div className="card-header border-0">
             <div className="d-flex justify-content-between">
               <h2>Todo List</h2>
@@ -60,16 +63,14 @@ export default function TodoList() {
               </li>
             </ul>
           </div>
-          <div className="card-body">
+          <div className="card-body align-items-left">
             {/* <h5 className="card-title">Special title treatment</h5> */}
             <div className="tab-content">
-              <div id="home" className="container tab-pane active">
+              <div id="home" className="container tab-pane active text-start">
                 <table className="table">
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">Id</th>
                       <th scope="col">Task name</th>
-                      <th scope="col">Completed</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -88,13 +89,11 @@ export default function TodoList() {
                   </tbody>
                 </table>
               </div>
-              <div id="menu1" className="container tab-pane fade">
+              <div id="menu1" className="container tab-pane fade text-start">
                 <table className="table">
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">Id</th>
                       <th scope="col">Task name</th>
-                      <th scope="col">Completed</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
@@ -105,30 +104,17 @@ export default function TodoList() {
                   </tbody>
                 </table>
               </div>
-              <div id="menu2" className="container tab-pane fade">
+              <div id="menu2" className="container tab-pane fade text-start">
                 <table className="table">
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">Id</th>
                       <th scope="col">Task name</th>
-                      <th scope="col">Completed</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {completedItems.map((todo: any, index: number) => {
+                    {deletedTodos.map((todo: any, index: number) => {
                       return <TodoListItem todo={todo} key={index} />;
-                    })}
-                    {todos.map((todo: any, index: number) => {
-                      return (
-                        <TodoListItem
-                          todo={todo}
-                          key={index}
-                          onCompletedClicked={() =>
-                            dispatch(markCompleted(todo.id))
-                          }
-                        />
-                      );
                     })}
                   </tbody>
                 </table>
