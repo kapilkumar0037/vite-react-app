@@ -53,8 +53,7 @@ export const todoSlice = createSlice({
             //   });
 
             .addCase(deleteTodosAsync.fulfilled, (state, action) => {
-                const newCompletedItems = state.completedItems.filter((todo) => todo.id !== action.payload);
-                state.completedItems = newCompletedItems;
+                state.completedItems = state.completedItems.filter((todo) => todo.id !== action.payload);;
             })
     },
 });
