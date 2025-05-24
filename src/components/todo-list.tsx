@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import TodoForm from "./todo-form";
 import TodoListItem from "./todo-list-item";
-import { fetchCompletedTodos, fetchTodos, markCompleted } from "../store/todo-slice";
+import { fetchTodos, markCompleted } from "../store/todo-slice";
 import { useEffect } from "react";
 import type { AppDispatch } from "../store/store";
 
@@ -16,7 +16,6 @@ export default function TodoList() {
 
   useEffect(() => {
     dispatch(fetchTodos());
-    dispatch(fetchCompletedTodos());
   }, [dispatch]);
 
   return (

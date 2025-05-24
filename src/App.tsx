@@ -1,10 +1,11 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
-import TodoList from "./components/todo-list";
+import { router } from "./App.routes";
 
 function App() {
   return (
     <>
-      <TodoList/>
+      <RouterProvider  router={router}/>
     </>
   );
 }

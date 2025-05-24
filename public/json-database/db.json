@@ -1,16 +1,4 @@
 {
-    "completedItems": [
-        {
-            "id": 1,
-            "title": "Learn React",
-            "completed": true
-        },
-        {
-            "id": 2,
-            "title": "Learn TypeScript",
-            "completed": true
-        }
-    ],
     "todos": [
         {
             "id": 3,
@@ -21,6 +9,16 @@
             "id": 4,
             "title": "Learn Javascript server",
             "completed": false
+        },
+        {
+            "id": 1,
+            "title": "Learn React",
+            "completed": true
+        },
+        {
+            "id": 2,
+            "title": "Learn TypeScript",
+            "completed": true
         }
     ]
 }

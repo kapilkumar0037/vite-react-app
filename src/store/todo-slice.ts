@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { TodoList } from "../models/todo.models";
+import type { TodoList, TodoListItem } from "../models/todo.models";
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
     const response = await fetch('http://localhost:3000/todos');
@@ -7,16 +7,10 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
     return data;
 });
 
-export const fetchCompletedTodos = createAsyncThunk('todos/completedTodos', async () => {
-    const response = await fetch('http://localhost:3000/completedItems');
-    const data = await response.json();
-    return data;
-});
-
 export const deleteTodosAsync = createAsyncThunk(
     'todos/deleteTodo',
     async (id: number) => {
-        await fetch(`http://localhost:3000/completedItems/${id}`, { method: 'DELETE' });
+        await fetch(`http://localhost:3000/todos/${id}`, { method: 'DELETE' });
         return id;
     }
 );
@@ -48,16 +42,15 @@ export const todoSlice = createSlice({
             //     state.error = null;
             //   })
             .addCase(fetchTodos.fulfilled, (state, action) => {
-                state.todos = action.payload;
+                const todos : TodoListItem[] = action.payload;
+                state.completedItems = todos.filter((todo) => todo.completed === true);
+                state.todos = todos.filter((todo) => todo.completed === false);
+
             })
             //   .addCase(fetchUser.rejected, (state, action) => {
             //     state.loading = false;
             //     state.error = action.error.message;
             //   });
-
-            .addCase(fetchCompletedTodos.fulfilled, (state, action) => {
-                state.completedItems = action.payload;
-            })
 
             .addCase(deleteTodosAsync.fulfilled, (state, action) => {
                 const newCompletedItems = state.completedItems.filter((todo) => todo.id !== action.payload);
