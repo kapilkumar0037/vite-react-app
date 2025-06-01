@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { deleteTodosAsync, markCompleted } from "../store/todo-slice";
+import { completeTodosAsync, deleteTodosAsync, markCompleted } from "../store/todo-slice";
 import type { AppDispatch } from "../store/store";
 
 export default function TodoListItem({
@@ -17,13 +17,13 @@ export default function TodoListItem({
         {todo.completed ? (
           <button
             className="btn btn-danger"
-            onClick={() => handleDelete(todo.id)}>
+            onClick={() => dispatch(deleteTodosAsync(todo))}>
             Delete
           </button>
         ) : (
           <button
             className="btn btn-success"
-            onClick={() => dispatch(markCompleted(todo.id))}>
+            onClick={() => dispatch(completeTodosAsync(todo))}>
             Complete
           </button>
         )}

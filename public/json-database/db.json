@@ -14,11 +14,16 @@
       "id": "1",
       "title": "Learn React",
       "completed": true
-        },
-        {
-            "id": 2,
-            "title": "Learn TypeScript",
-            "completed": true
+    },
+    {
+      "id": 2,
+      "title": "Learn TypeScript",
+      "completed": true
+    },
+    {
+      "id": 6,
+      "title": "testing",
+      "completed": false
     }
   ]
 }

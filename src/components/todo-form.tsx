@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createTodo } from "../store/todo-slice";
+import { createTodosAsync } from "../store/todo-slice";
+import type { AppDispatch } from "../store/store";
 
 export default function TodoForm({setAddTodoStatus}: any) {
   const [todoText, setTodoText] = useState("");
-  const dispatch = useDispatch();
+   const dispatch = useDispatch<AppDispatch>(); 
 
   return (
     <div className="card text-center p-2">
@@ -23,7 +24,7 @@ export default function TodoForm({setAddTodoStatus}: any) {
           className="btn btn-primary mt-3"
           style={{ whiteSpace: "nowrap" }}
           onClick={() => {
-            dispatch(createTodo({ id: 5, title: todoText, completed: false }));
+            dispatch(createTodosAsync({ id: 6, title: todoText, completed: false }));
             setTodoText("");
             setAddTodoStatus();
           }}

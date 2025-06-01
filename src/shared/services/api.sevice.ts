@@ -8,4 +8,9 @@ export class ApiService {
   deleteTodo(id: number): Api {
     return new Api(`${BASE}/todos/${id}`);
   }
+  updateTodo(id: number): Api {
+    return new Api(`${BASE}/todos/${id}`);
+  }
 }
+
+export const apiService = new ApiService();
