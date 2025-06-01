@@ -1,17 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { TodoList, TodoListItem } from "../models/todo.models";
+import { ApiService } from "../shared/services/api.sevice";
 
 export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-    const response = await fetch('http://localhost:3000/todos');
-    const data = await response.json();
+    const apiService = new ApiService();
+    const response = await apiService.todos.get();
+    const data = await response.data;
     return data;
 });
 
 export const deleteTodosAsync = createAsyncThunk(
     'todos/deleteTodo',
     async (id: number) => {
-        await fetch(`http://localhost:3000/todos/${id}`, { method: 'DELETE' });
-        return id;
+        const apiService = new ApiService();
+        const response = await apiService.deleteTodo(id).delete();
+        return response.data.id; // Assuming the API returns the deleted todo's id
     }
 );
 
