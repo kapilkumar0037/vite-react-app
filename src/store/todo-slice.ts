@@ -53,10 +53,6 @@ export const todoSlice = createSlice({
 
     extraReducers: (builder) => {
         builder
-            //   .addCase(fetchUser.pending, (state) => {
-            //     state.loading = true;
-            //     state.error = null;
-            //   })
             .addCase(fetchTodos.fulfilled, (state, action) => {
                 const todos: TodoListItem[] = action.payload;
                 state.completedItems = todos.filter((todo) => todo.completed === true && todo.isDeleted === false);
