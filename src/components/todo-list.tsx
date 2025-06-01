@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import TodoListItem from "./todo-list-item";
-import { fetchTodos, markCompleted } from "../store/todo-slice";
+import { fetchTodos } from "../store/todo-slice";
 import { useEffect, useState } from "react";
 import type { AppDispatch } from "../store/store";
 import TodoForm from "./todo-form";
@@ -80,9 +80,6 @@ export default function TodoList() {
                         <TodoListItem
                           todo={todo}
                           key={index}
-                          onCompletedClicked={() =>
-                            dispatch(markCompleted(todo.id))
-                          }
                         />
                       );
                     })}

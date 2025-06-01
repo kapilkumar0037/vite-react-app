@@ -3,27 +3,44 @@
     {
       "id": "3",
       "title": "Learn angular server",
-      "completed": false
+      "completed": false,
+      "isDeleted": false
     },
     {
       "id": "4",
       "title": "Learn Javascript server",
-      "completed": false
+      "completed": false,
+      "isDeleted": false
     },
     {
       "id": "1",
       "title": "Learn React",
-      "completed": true
+      "completed": true,
+      "isDeleted": false
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Learn TypeScript",
-      "completed": true
+      "completed": true,
+      "isDeleted": true
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "testing",
-      "completed": false
+      "completed": true,
+      "isDeleted": true
+    },
+    {
+      "id": "26",
+      "title": "testing 1",
+      "completed": true,
+      "isDeleted": true
+    },
+    {
+      "id": "151",
+      "title": "testing 2",
+      "completed": true,
+      "isDeleted": true
     }
   ]
 }
