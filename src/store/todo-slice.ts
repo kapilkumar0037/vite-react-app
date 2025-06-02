@@ -8,11 +8,20 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
     return data;
 });
 
-export const deleteTodosAsync = createAsyncThunk(
-    'todos/deleteTodo',
+export const archieveTodosAsync = createAsyncThunk(
+    'todos/archieveTodo',
     async (payload: TodoListItem, thunkAPI) => {
         const updatedTodo = { ...payload, isDeleted: true };
         const response = await apiService.updateTodo(updatedTodo.id).put(updatedTodo);
+        thunkAPI.dispatch(fetchTodos());
+        return response.data.id;
+    }
+);
+
+export const deleteTodosAsync = createAsyncThunk(
+    'todos/deleteTodo',
+    async (payload: TodoListItem, thunkAPI) => {
+        const response = await apiService.deleteTodo(payload.id).delete();
         thunkAPI.dispatch(fetchTodos());
         return response.data.id;
     }
