@@ -8,4 +8,5 @@ export interface TodoListItem {
     completedItems: TodoListItem[];
     todos: TodoListItem[];
     deletedTodos: TodoListItem[];
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
   }

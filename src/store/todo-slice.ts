@@ -51,13 +51,16 @@ export const completeTodosAsync = createAsyncThunk(
 const initialState: TodoList = {
     completedItems: [],
     todos: [],
-    deletedTodos: []
+    deletedTodos: [],
+    status: 'idle',
 }
 export const todoSlice = createSlice({
     name: "todos",
     initialState,
     reducers: {
-
+        setStatus: (state, action) => {
+            state.status = action.payload;
+        }
     },
 
     extraReducers: (builder) => {
@@ -67,9 +70,11 @@ export const todoSlice = createSlice({
                 state.completedItems = todos.filter((todo) => todo.completed === true && todo.isDeleted === false);
                 state.deletedTodos = todos.filter((todo) => todo.isDeleted === true && todo.completed === true);
                 state.todos = todos.filter((todo) => todo.isDeleted === false && todo.completed === false);
-
+            })
+            .addCase(createTodosAsync.fulfilled, (state, action) => {
+                state.status = 'succeeded';
             })
     },
 });
 
-export const { } = todoSlice.actions;
+export const { setStatus } = todoSlice.actions;

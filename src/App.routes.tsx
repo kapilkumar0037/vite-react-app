@@ -12,6 +12,10 @@ export const routes = [
         path: "/",
         element: <TodoList />,
       },
+      {
+        path: "add-todo",
+        element: <TodoForm />,
+      },
     ],
   },
 ];
